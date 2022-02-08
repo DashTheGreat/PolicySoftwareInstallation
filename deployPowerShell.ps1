@@ -13,15 +13,15 @@ if ($eventData.subject -match 'microsoft.compute/virtualmachines') {
 
     $ctx = (Get-AzStorageAccount -ResourceGroupName $resourceGroupName -Name $storageAccountName).Context
 
-    $sasUri = New-AzStorageBlobSASToken -Blob 'PowerShell-7.1.3-win-x64.msi' -Container software -Permission r -ExpiryTime (Get-Date).AddMinutes(30) -Context $ctx -FullUri
+    $sasUri = New-AzStorageBlobSASToken -Blob 'TeamViewer_Host.msi' -Container software -Permission r -ExpiryTime (Get-Date).AddMinutes(30) -Context $ctx -FullUri
 
 
     $scriptBlock = @'
 $sasUri = "VALUE"
 
-Invoke-WebRequest -Uri $sasUri -OutFile "$env:TEMP\PowerShell-7.1.3-win-x64.msi" -Verbose
+Invoke-WebRequest -Uri $sasUri -OutFile "$env:TEMP\TeamViewer_Host.msi" -Verbose
 
-Start-Process "$env:Temp\PowerShell-7.1.3-win-x64.msi" -ArgumentList "/quiet /norestart" -Verbose
+Start-Process 'msiexec.exe' -ArgumentList '/i', "$env:Temp\TeamViewer_Host.msi", '/qn DESKTOPSHORTCUTS=0 CUSTOMCONFIGID=6b65jzf APITOKEN=14590208-wIdpxsxFUNXRKoa8trAU ASSIGNMENTOPTIONS="--reassign --alias %ComputerName% --grant-easy-access --group AVD"' -Wait
 '@
 
     $scriptBlock | Out-File $env:Temp\script.ps1

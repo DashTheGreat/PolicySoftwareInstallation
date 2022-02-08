@@ -10,10 +10,10 @@ resource softwarepol 'Microsoft.Authorization/policyAssignments@2020-09-01' = {
   location: location
   properties: {
     policyDefinitionId: policyDefinitionId
-    displayName: 'Audit windows virtual machines without PowerShell installed'
+    displayName: 'Audit AVD VMs without TeamViewer installed'
     parameters: {
       installedApplication: {
-        value: 'PowerShell 7-x64'
+        value: 'TeamViewer Host'
       }
     }
   }
