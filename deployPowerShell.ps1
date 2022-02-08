@@ -8,8 +8,8 @@ if ($eventData.subject -match 'microsoft.compute/virtualmachines') {
 
     Connect-AzAccount -Identity
 
-    $storageAccountName = Get-AutomationVariable "StorageAccountName"
-    $resourceGroupName = Get-AutomationVariable "ResourceGroupName"
+    $storageAccountName = Get-AutomationVariable "saukhsaukspreapol01"
+    $resourceGroupName = Get-AutomationVariable "RG-UKHSA-UKS-PRE-AVD-APOL-01"
 
     $ctx = (Get-AzStorageAccount -ResourceGroupName $resourceGroupName -Name $storageAccountName).Context
 
