@@ -1,14 +1,14 @@
 $params = @{
-    resourceGroupName     = "SoftwareInstallation" # <-- Change this value for the Resource Group Name
-    storageAccountName    = "strsi01a" # <-- Change this value - must be globally unique
-    location              = "australiasoutheast" # <-- Change this value to a location you want
-    automationAccountName = "siaa01" # <-- Change this value for the Automation Account Name
+    resourceGroupName     = "RG-UKHSA-UKS-DEV-AVD-APOL-01" # <-- Change this value for the Resource Group Name
+    storageAccountName    = "saukhsauksdevapol01" # <-- Change this value - must be globally unique
+    location              = "uksouth" # <-- Change this value to a location you want
+    automationAccountName = "ATM-UKHSA-UKS-DEV-AVD-APOL-01" # <-- Change this value for the Automation Account Name
 }
 
-New-AzResourceGroup -Name $params.resourceGroupName -Location 'australiasoutheast' -Force
+New-AzResourceGroup -Name $params.resourceGroupName -Location $params.location -Force
 
 Write-Host "Deploying Infrastructure" -ForegroundColor Green
-New-AzResourceGroupDeployment -ResourceGroupName $params.resourceGroupName -TemplateFile .\deploy.bicep -TemplateParameterObject $params -Verbose
+New-AzResourceGroupDeployment -ResourceGroupName $params.resourceGroupName -TemplateFile "C:\Users\Darshit.Patel\OneDrive - UK Health Security Agency\DashTheGreat_GitRepo\PolicySoftwareInstallation\deploy.bicep" -TemplateParameterObject $params -Verbose
 
 $ctx = (Get-AzStorageAccount -ResourceGroupName $params.resourceGroupName -StorageAccountName $params.storageAccountName).Context
 
