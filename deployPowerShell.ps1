@@ -17,7 +17,6 @@ if ($eventData.subject -match 'microsoft.compute/virtualmachines') {
 
 
     $scriptBlock = @'
-$sasUri = "VALUE"
 
 Invoke-WebRequest -Uri $sasUri -OutFile "$env:TEMP\TeamViewer_Host.msi" -Verbose
 
